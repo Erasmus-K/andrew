@@ -53,3 +53,53 @@ window.addEventListener("scroll", () => {
     navbar.classList.remove("scrolled");
   }
 });
+
+<script>
+const slides = document.querySelectorAll(".blog-slide");
+const prevBtn = document.querySelector(".prev-btn");
+const nextBtn = document.querySelector(".next-btn");
+const dotsContainer = document.querySelector(".slider-dots");
+
+let currentIndex = 0;
+
+// Generate dots dynamically
+slides.forEach((_, i) => {
+  const dot = document.createElement("span");
+  if (i === 0) dot.classList.add("active");
+  dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll(".slider-dots span");
+
+// Function to show slide
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.style.display = i === index ? "flex" : "none";
+  });
+  dots.forEach(dot => dot.classList.remove("active"));
+  dots[index].classList.add("active");
+}
+
+// Next / Prev buttons
+nextBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  showSlide(currentIndex);
+});
+
+prevBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  showSlide(currentIndex);
+});
+
+// Dots click
+dots.forEach((dot, i) => {
+  dot.addEventListener("click", () => {
+    currentIndex = i;
+    showSlide(currentIndex);
+  });
+});
+
+// Initialize first slide
+showSlide(currentIndex);
+</script>
+
