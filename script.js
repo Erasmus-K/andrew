@@ -20,6 +20,13 @@ counters.forEach(counter => {
   updateCounter();
 });
 
+// let btn = document.querySelector("btn");
+// btn.addEventListener('mousemove', e => () => {
+//   let rect = e.target.getBoundingClientRect();
+//   let x = e.clientX * 3 - rect.left;
+//   btn.style.setProperty('--x', x + 'deg');
+// })
+
 // ===================== Testimonials Slider =====================
 let currentTestimonial = 0;
 const testimonials = document.querySelectorAll(".testimonial");
