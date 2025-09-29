@@ -1,63 +1,71 @@
-// Counter Animation
+// ===================== Counter Animation =====================
 const counters = document.querySelectorAll(".counter h3");
+
 counters.forEach(counter => {
   counter.innerText = "0";
+
   const updateCounter = () => {
     const target = +counter.getAttribute("data-target");
-    const c = +counter.innerText;
+    const current = +counter.innerText;
     const increment = target / 200;
-    if (c < target) {
-      counter.innerText = `${Math.ceil(c + increment)}`;
+
+    if (current < target) {
+      counter.innerText = `${Math.ceil(current + increment)}`;
       setTimeout(updateCounter, 10);
     } else {
       counter.innerText = target;
     }
   };
+
   updateCounter();
 });
 
-// Testimonials Slider
+// let btn = document.querySelector("btn");
+// btn.addEventListener('mousemove', e => () => {
+//   let rect = e.target.getBoundingClientRect();
+//   let x = e.clientX * 3 - rect.left;
+//   btn.style.setProperty('--x', x + 'deg');
+// })
+
+// ===================== Testimonials Slider =====================
 let currentTestimonial = 0;
 const testimonials = document.querySelectorAll(".testimonial");
-const nextBtn = document.getElementById("next");
-const prevBtn = document.getElementById("prev");
+const testimonialNextBtn = document.getElementById("next");
+const testimonialPrevBtn = document.getElementById("prev");
 
 function showTestimonial(index) {
   testimonials.forEach((t, i) => {
-    t.classList.remove("active");
-    if (i === index) t.classList.add("active");
+    t.classList.toggle("active", i === index);
   });
 }
-nextBtn.addEventListener("click", () => {
+
+testimonialNextBtn.addEventListener("click", () => {
   currentTestimonial = (currentTestimonial + 1) % testimonials.length;
   showTestimonial(currentTestimonial);
 });
-prevBtn.addEventListener("click", () => {
+
+testimonialPrevBtn.addEventListener("click", () => {
   currentTestimonial =
     (currentTestimonial - 1 + testimonials.length) % testimonials.length;
   showTestimonial(currentTestimonial);
 });
 
-// Auto slide
+// Auto slide every 5s
 setInterval(() => {
   currentTestimonial = (currentTestimonial + 1) % testimonials.length;
   showTestimonial(currentTestimonial);
 }, 5000);
 
-// Navbar scroll effect
+// ===================== Navbar Scroll Effect =====================
 const navbar = document.querySelector(".navbar");
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
-  }
+  navbar.classList.toggle("scrolled", window.scrollY > 50);
 });
 
-<script>
+// ===================== Blog Slider =====================
 const slides = document.querySelectorAll(".blog-slide");
-const prevBtn = document.querySelector(".prev-btn");
-const nextBtn = document.querySelector(".next-btn");
+const blogPrevBtn = document.querySelector(".prev-btn");
+const blogNextBtn = document.querySelector(".next-btn");
 const dotsContainer = document.querySelector(".slider-dots");
 
 let currentIndex = 0;
@@ -81,12 +89,12 @@ function showSlide(index) {
 }
 
 // Next / Prev buttons
-nextBtn.addEventListener("click", () => {
+blogNextBtn.addEventListener("click", () => {
   currentIndex = (currentIndex + 1) % slides.length;
   showSlide(currentIndex);
 });
 
-prevBtn.addEventListener("click", () => {
+blogPrevBtn.addEventListener("click", () => {
   currentIndex = (currentIndex - 1 + slides.length) % slides.length;
   showSlide(currentIndex);
 });
@@ -101,5 +109,3 @@ dots.forEach((dot, i) => {
 
 // Initialize first slide
 showSlide(currentIndex);
-</script>
-
